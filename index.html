@@ -134,17 +134,20 @@
 			<img id="hedda" class="masks" src="/example/media/hedda_4.png"></img>
 			</div>
 			<script>
+				var debug = false;
+
 				var vid = document.getElementById('videoel');
 				var overlay = document.getElementById('overlay');
 				var overlayCC = overlay.getContext('2d');
 
 				var ctrack = new clm.tracker();
 				ctrack.init(pModel);
-
-				stats = new Stats();
-				stats.domElement.style.position = 'absolute';
-				stats.domElement.style.top = '0px';
-				document.getElementById('container').appendChild( stats.domElement );
+				if(debug){
+					stats = new Stats();
+					stats.domElement.style.position = 'absolute';
+					stats.domElement.style.top = '0px';
+					document.getElementById('container').appendChild( stats.domElement );
+				}
 
 				function enablestart() {
 					var startbutton = document.getElementById('startbutton');
@@ -293,9 +296,11 @@
 					animationRequest = requestAnimFrame(drawMaskLoop);
 				}
 
-				document.addEventListener("clmtrackrIteration", function(event) {
-					stats.update();
-				}, false);
+				if (debug){
+					document.addEventListener("clmtrackrIteration", function(event) {
+						stats.update();
+					}, false);
+				}
 
 			</script>
 		</div>
