@@ -83,35 +83,13 @@
 				display : block;
 			}
 		</style>
+		<script src="js/clmtrackr.js"></script>
+		<script src="js/model_pca_20_svm.js"></script>
+		<script src="js/face_deformer.js"></script>
+		<script src="js/p5.js"></script>
+		<script src="js/p5.dom.js"></script>
 	</head>
 	<body>
-		<script src="/ext_js/dat.gui.min.js"></script>
-		<script src="/ext_js/utils.js"></script>
-		<script src="/ext_js/jsfeat-min.js"></script>
-		<script src="/ext_js/frontalface.js"></script>
-		<script src="/ext_js/jsfeat_detect.js"></script>
-		<script src="/ext_js/numeric-1.2.6.min.js"></script>
-		<script src="/ext_js/mosse.js"></script>
-		<script src="/ext_js/left_eye_filter.js"></script>
-		<script src="/ext_js/right_eye_filter.js"></script>
-		<script src="/ext_js/nose_filter.js"></script>
-		<script src="/js/models/model_pca_20_svm.js"></script>
-		<script src="/js/clm.js"></script>
-		<script src="/js/svmfilter_webgl.js"></script>
-		<script src="/js/svmfilter_fft.js"></script>
-		<script src="/js/mossefilter.js"></script>
-		<script src="/ext_js/Stats.js"></script>
-		<script src="/js/face_deformer.js"></script>
-		<div id="content">
-			<div id="container">
-				<!--<video id="videoel" width="500" height="375" preload="auto">-->
-				<video id="videoel" width="1024" height="768" preload="auto">
-					<!--<source src="/example/media/Capture_1_092.ogv" type="video/ogg"/>-->
-				</video>
-				<canvas id="overlay" width="1024" height="768"></canvas>
-				<canvas id="webgl" width="1024" height="768"></canvas>
-			</div>
-		</div>
 		<div class="actions">
 			<input class="btn" type="button" value="wait, loading video" disabled="disabled" onclick="startVideo()" id="startbutton"></input>
 			<select name="mask" id="selectmask">
@@ -134,6 +112,6 @@
 			<img id="hedda" class="masks" src="/example/media/hedda_4.png"></img>
 			</div>
 		</div>
-		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="/js/app.js"></script>
 	</body>
 </html>
