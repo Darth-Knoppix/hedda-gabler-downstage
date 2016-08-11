@@ -22,13 +22,11 @@ function setup() {
   // setup camera capture
   var videoInput = createCapture();
   videoInput.size(640, 480);
-  videoInput.position(0, 0);
+  videoInput.parent('videoel');
 
   // setup canvas
   canvas = createCanvas(640, 480, 'WEBGL');
-  deformerCanvas = createCanvas(640, 480, 'WEBGL');
-  deformerCanvas.position(0, 0);
-  canvas.position(0, 0);
+  canvas.parent('overlay');
 
   // setup tracker
   ctracker = new clm.tracker();
@@ -37,7 +35,7 @@ function setup() {
 
   // setup face deformer
   fd = new faceDeformer();
-  fd.init(deformerCanvas);
+  fd.init(document.getElementById('webgl'));
   fd.load(document.getElementById('hedda'), masks.hedda, pModel);
 
   noStroke();
