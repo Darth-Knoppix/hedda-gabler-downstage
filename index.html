@@ -31,10 +31,27 @@
 				filter : fliph; /*IE*/
 			}
 
+			.focus {
+				-webkit-filter: grayscale(1) blur(0px);
+			}
+
 			#container {
 				width: 100vw;
 				height: 100vh;
-				/*margin : 0px auto;*/
+				-webkit-filter: grayscale(1) blur(10px);
+				filter: grayscale(1) blur(10px);
+				transition: filter 5s linear;
+				-webkit-transition: -webkit-filter 5s linear;
+			}
+
+			#container.mid-blur {
+				-webkit-filter: grayscale(1) blur(7px);
+				filter: grayscale(1) blur(0px);
+			}
+
+			#container.no-blur {
+				-webkit-filter: grayscale(1) blur(0px);
+				filter: grayscale(1) blur(0px);
 			}
 
 			#content {
