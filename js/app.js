@@ -42,7 +42,7 @@ function draw() {
   // filter("gray");
 
   // get array of face marker positions [x, y] format
-  var positions = ctracker.getCurrentPosition();
+  var positions = ctracker.getCurrentPosition(videoInput.canvas);
 
   // console.log(positions);
 
