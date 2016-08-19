@@ -34,10 +34,10 @@
       #container {
         width: 100vw;
         height: 100vh;
-        -webkit-filter: grayscale(1) blur(10px);
+/*        -webkit-filter: grayscale(1) blur(10px);
         filter: grayscale(1) blur(10px);
         transition: filter 5s linear;
-        -webkit-transition: -webkit-filter 5s linear;
+        -webkit-transition: -webkit-filter 5s linear;*/
         position : relative;
         /*margin : 0px auto;*/
       }
@@ -126,8 +126,7 @@
         <option value="0">Hedda</option>
         <option value="1">Hedda 1</option>
       </select>
-      <img id="img-0" class="masks" src="/example/media/hedda_4.png"></img>
-      <img id="img-1" class="masks" src="/example/media/hedda_5.png"></img>
+      <div id="images"></div>
       <script>
         var vid = document.getElementById('videoel');
         var overlay = document.getElementById('overlay');
@@ -135,17 +134,39 @@
         var width = 640;
         var height = 480;
         var frame = 0;
+        var canReset = false;
+        var imgNumber = 204;
 
         var ctrack = new clm.tracker();
         ctrack.init(pModel);
 
-        window.setInterval(function() {
-          ++frame;
-          if(frame > 1){
-            frame = 0;
+        function pad(n, width, z) {
+          z = z || '0';
+          n = n + '';
+          return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+        }
+
+        function loadImages(){
+          var $images = document.getElementById('images');
+          var data = '';
+          for(var i =0; i < imgNumber;++i) {
+            data += '<img id="img-' + i + '" class="masks" src="/sequence/hedda-fragment' + pad(i, 4) + '.png"></img>';
           }
-          switchMasks();
-        }, 1000);
+          $images.innerHTML = data;
+        }
+
+        loadImages();
+
+        function startAnim() {
+          window.setInterval(function() {
+            if(frame > imgNumber - 2){
+              canReset = true;
+              return;
+            }
+            ++frame;
+            switchMasks();
+          }, 2);
+        }
 
         var insertAltVideo = function(video) {
 
@@ -249,8 +270,12 @@
           var pn = ctrack.getConvergence();
           if (pn < 0.4) {
             switchMasks();
+            startAnim();
             requestAnimFrame(drawMaskLoop);
           } else {
+            if(canReset) {
+              frame = 0;
+            }
             requestAnimFrame(drawGridLoop);
           }
         }
@@ -276,6 +301,11 @@
             } else {
               container.classList.remove('no-blur');
               container.classList.remove('mid-blur');
+              ctrack.reset();
+              frame = 0;
+              window.setTimeout(function() {
+                ctrack.start(vid);
+              }, 2000);
             }
             fd.draw(positions);
           }
