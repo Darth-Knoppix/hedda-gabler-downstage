@@ -287,7 +287,7 @@
 
         function drawMaskLoop() {
           // get position of face
-          positions = ctrack.getCurrentPosition();
+          positions = ctrack.getCurrentPosition(vid);
           overlayCC.clearRect(0, 0, width, height);
           if (positions) {
             // draw mask on top of face
@@ -301,19 +301,16 @@
             } else {
               container.classList.remove('no-blur');
               container.classList.remove('mid-blur');
-              ctrack.reset();
               frame = 0;
-              window.setTimeout(function() {
-                ctrack.start(vid);
-              }, 2000);
             }
             fd.draw(positions);
+            animationRequest = requestAnimFrame(drawMaskLoop);
+          }else{
+            return;
           }
-          animationRequest = requestAnimFrame(drawMaskLoop);
         }
 
       </script>
     </div>
   </body>
->>>>>>> p5-test
 </html>
