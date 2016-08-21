@@ -32,14 +32,14 @@
       }
 
       #container {
-        width: 100vw;
-        height: 100vh;
+        width: 1440px;
+        height: 1080px;
+        margin: auto;
         -webkit-filter: grayscale(1) blur(10px);
         filter: grayscale(1) blur(10px);
         transition: filter 5s linear;
         -webkit-transition: -webkit-filter 5s linear;
         position : relative;
-        /*margin : 0px auto;*/
       }
 
       #content {
@@ -115,24 +115,19 @@
     <div id="content">
       <div id="container">
         <!--<video id="videoel" width="500" height="375" preload="auto">-->
-        <video id="videoel" width="640" height="480" preload="auto">
+        <video id="videoel" width="1440" height="1080" preload="auto">
           <!--<source src="./media/Capture_1_092.ogv" type="video/ogg"/>-->
         </video>
-        <canvas id="overlay" width="640" height="480"></canvas>
-        <canvas id="webgl" width="640" height="480"></canvas>
+        <canvas id="overlay" width="1440" height="1080"></canvas>
+        <canvas id="webgl" width="1440" height="1080"></canvas>
       </div>
-      <br/>
-      <select name="mask" id="selectmask">
-        <option value="0">Hedda</option>
-        <option value="1">Hedda 1</option>
-      </select>
       <div id="images"></div>
       <script>
         var vid = document.getElementById('videoel');
         var overlay = document.getElementById('overlay');
         var overlayCC = overlay.getContext('2d');
-        var width = 640;
-        var height = 480;
+        var width = 1440;
+        var height = 1080;
         var frame = 0;
         var canReset = false;
         var imgNumber = 204;
@@ -234,8 +229,6 @@
 
         vid.addEventListener('canplay', startVideo, false);
 
-        document.getElementById('selectmask').addEventListener('change', updateMask, false);
-
         function updateMask(el) {
           currentMask = parseInt(el.target.value, 10);
           switchMasks();
@@ -261,7 +254,7 @@
         function drawGridLoop() {
           // get position of face
           positions = ctrack.getCurrentPosition(vid);
-          overlayCC.clearRect(0, 0, width, height);
+          overlayCC.clearRect(0, 0, 1440, 1080);
           if (positions) {
             // draw current grid
             ctrack.draw(overlay);
@@ -288,7 +281,7 @@
         function drawMaskLoop() {
           // get position of face
           positions = ctrack.getCurrentPosition(vid);
-          overlayCC.clearRect(0, 0, width, height);
+          overlayCC.clearRect(0, 0, 1440, 1080);
           if (positions) {
             // draw mask on top of face
             var distance = positions[13][0] - positions[1][0];
