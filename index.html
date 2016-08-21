@@ -11,7 +11,6 @@
         height: 100vh;
       }
 
-
       #overlay, #webgl {
         position: absolute;
         top: 0px;
@@ -32,7 +31,7 @@
       }
 
       #container {
-        width: 1440px;
+        width: 640px;
         height: 1080px;
         margin: auto;
         -webkit-filter: grayscale(1) blur(10px);
@@ -164,7 +163,6 @@
         }
 
         var insertAltVideo = function(video) {
-
           if (supports_video()) {
             if (supports_ogg_theora_video()) {
               video.src = "./media/cap13_edit2.ogv";
@@ -283,6 +281,9 @@
           positions = ctrack.getCurrentPosition(vid);
           overlayCC.clearRect(0, 0, 1440, 1080);
           if (positions) {
+            if(ctrack.getScore() < 0.5){
+              frame = 0;
+            }
             // draw mask on top of face
             var distance = positions[13][0] - positions[1][0];
             if(distance > 100 && distance < 150) {
@@ -294,13 +295,10 @@
             } else {
               container.classList.remove('no-blur');
               container.classList.remove('mid-blur');
-              frame = 0;
             }
             fd.draw(positions);
-            animationRequest = requestAnimFrame(drawMaskLoop);
-          }else{
-            return;
           }
+          animationRequest = requestAnimFrame(drawMaskLoop);
         }
 
       </script>
